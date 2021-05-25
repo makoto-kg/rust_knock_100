@@ -1,4 +1,4 @@
-use knock100::knocks::*;
+use knocks100::knocks::*;
 
 pub fn main() {
     knock000::exec();

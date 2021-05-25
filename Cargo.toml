@@ -1,5 +1,5 @@
 [package]
-name = "knock100"
+name = "knocks100"
 version = "0.1.0"
 authors = ["makotox"]
 edition = "2018"

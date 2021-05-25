@@ -8,3 +8,6 @@ pub mod knock006;
 pub mod knock007;
 pub mod knock008;
 pub mod knock009;
+pub mod knock010;
+pub mod knock011;
+pub mod knock012;
