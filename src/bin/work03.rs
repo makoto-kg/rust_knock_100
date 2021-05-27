@@ -5,4 +5,6 @@ pub fn main() {
   knock011::exec();
   knock012::exec();
   knock013::exec();
+  knock014::exec();
+  knock015::exec();
 }
