@@ -1,12 +1,14 @@
 use std::path::Path;
 use std::fs::File;
 use std::io::BufReader;
-use regex::Regex;
+
 use super::knock020::Article;
 
-pub fn category_line(article: &Article) -> Vec<&str> {
-  let regex = Regex::new(r"\[\[Category.*\]\]").unwrap(); 
-  article.text.lines().filter(|l| regex.is_match(l)).collect()
+use regex::Regex;
+
+pub fn files(article: &Article) -> Vec<&str> {
+  let regex = Regex::new(r"\[\[(?:File|ファイル):([^|]*).*\]\]").unwrap();
+  regex.captures_iter(&article.text).map(|captures| captures.get(1).unwrap().as_str()).collect()
 }
 
 pub fn exec() {
@@ -15,7 +17,6 @@ pub fn exec() {
   let reader = BufReader::new(file);
 
   let article: Article = serde_json::from_reader(reader).unwrap();
-
-  let result = category_line(&article);
+  let result = files(&article);
   println!("{:?}", result);
 }

@@ -1,3 +1,4 @@
 /target
 Cargo.lock
 /work
+.DS_Store

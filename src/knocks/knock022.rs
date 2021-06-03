@@ -1,6 +1,8 @@
 use std::path::Path;
+use std::fs::File;
+use std::io::BufReader;
 use regex::Regex;
-use super::knock020::*;
+use super::knock020::Article;
 
 pub fn category_name(article: &Article) -> Vec<&str> {
   let regex = Regex::new(r"\[\[Category:([^|\n]*)\|?.*\]\]").unwrap();
@@ -8,8 +10,11 @@ pub fn category_name(article: &Article) -> Vec<&str> {
 }
 
 pub fn exec() {
-  let path = Path::new("data/jawiki-country.json.gz");
-  let article = json_read_about(path, "イギリス").unwrap();
+  let path = Path::new("data/sample006.json");
+  let file = File::open(path).unwrap();
+  let reader = BufReader::new(file);
+
+  let article: Article = serde_json::from_reader(reader).unwrap();
   let result = category_name(&article);
   println!("{:?}", result);
 }
