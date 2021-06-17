@@ -4,9 +4,9 @@ use std::io::{BufReader, BufRead, Result};
 use super::knock040::Morph;
 
 pub struct Chunk {
-    morphs: Vec<Morph>,
-    dst: isize,
-    srcs: Vec<usize>,
+    pub morphs: Vec<Morph>,
+    pub dst: isize,
+    pub srcs: Vec<usize>,
 }
 
 impl Chunk {
@@ -17,6 +17,14 @@ impl Chunk {
             srcs: Vec::new(),
         }
     }
+
+    pub fn get_text(&self) -> String {
+        self.morphs.iter()
+            .filter(|m| m.pos != "記号")
+            .map(|m| m.surface.clone())
+            .collect::<String>()
+    }
+
     pub fn from_file(path: &Path) -> Result<Vec<Vec<Self>>> {
         let file = File::open(path)?;
         let br = BufReader::new(file);
